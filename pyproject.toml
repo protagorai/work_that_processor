@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "system_report"
+version = "0.1.0"
+description = "Cross platform system information gathering tool"
+readme = "README.md"
+authors = [{name = "Auto"}]
+requires-python = ">=3.8"
+
+[project.scripts]
+system-report = "system_report.cli:main"
