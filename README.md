@@ -1,8 +1,8 @@
 # System Report
 
 System Report is a small cross platform tool to gather information about the
-current machine. It collects CPU, GPU, RAM, storage and software information 
-and stores it in a timestamped JSON file in the user's Downloads directory.
+current machine. It collects CPU, GPU, RAM, storage and software information
+and stores it in a timestamped JSON file.
 
 ## Running
 
@@ -13,8 +13,9 @@ pip install -e .
 system-report
 ```
 
-This will create or update a `system_report.json` file in your `~/Downloads`
-directory.
+This will create or update a `system_report.json` file in the `examples`
+directory of the project if it exists and is writable. Otherwise the file will
+be stored in your `~/Downloads` directory.
 
 ## Tests
 
