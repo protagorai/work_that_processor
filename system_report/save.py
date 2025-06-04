@@ -2,20 +2,28 @@ import json
 from datetime import datetime
 from pathlib import Path
 import platform
+import os
+
+PACKAGE_ROOT = Path(__file__).resolve().parent.parent
 
 
 def default_path() -> Path:
+    """Return the default path to write the system report JSON."""
+    examples = PACKAGE_ROOT / "examples"
+    # fall back to user Downloads directory if examples folder is not
+    # writeable (e.g. when installed system-wide)
+    if examples.exists() and os.access(examples, os.W_OK):
+        return examples / "system_report.json"
+
     home = Path.home()
-    if platform.system() == "Windows":
-        return home / "Downloads" / "system_report.json"
-    else:
-        return home / "Downloads" / "system_report.json"
+    return home / "Downloads" / "system_report.json"
 
 
 def save_report(data: dict, path: Path = None) -> Path:
     if path is None:
         path = default_path()
-    # ensure the directory exists so we don't fail if ~/Downloads is missing
+    # ensure the directory exists in case the examples folder or Downloads
+    # directory is missing
     path.parent.mkdir(parents=True, exist_ok=True)
     if path.exists():
         with path.open("r", encoding="utf-8") as fh:
