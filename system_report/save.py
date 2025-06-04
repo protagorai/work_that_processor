@@ -15,6 +15,8 @@ def default_path() -> Path:
 def save_report(data: dict, path: Path = None) -> Path:
     if path is None:
         path = default_path()
+    # ensure the directory exists so we don't fail if ~/Downloads is missing
+    path.parent.mkdir(parents=True, exist_ok=True)
     if path.exists():
         with path.open("r", encoding="utf-8") as fh:
             existing = json.load(fh)
